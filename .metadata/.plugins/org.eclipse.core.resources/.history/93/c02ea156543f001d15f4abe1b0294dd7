@@ -102,7 +102,7 @@ int main(void)
   {
 	  if (timer_flag_7SEG == 1){
 		  setTimer7SEG(50);
-		  if (index_led == 4) index_led = 0;	// reset index_led
+		  if (index_led == 4) index_led = 0;
 		  update7SEG(index_led++);
 	  }
     /* USER CODE END WHILE */
