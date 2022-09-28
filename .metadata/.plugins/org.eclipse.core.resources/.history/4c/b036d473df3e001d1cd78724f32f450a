@@ -17,7 +17,7 @@ void setTimer7SEG(int duration){
 	timer_flag_7SEG = 0;
 }
 
-void setTimerDOT(int duration){
+void setTimerDot(int duration){
 	timer_counter_DOT = duration;
 	timer_flag_DOT = 0;
 }
