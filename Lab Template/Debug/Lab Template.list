@@ -117,8 +117,8 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer7SEG(50);		// 0.5s
- 8000166:	2032      	movs	r0, #50	; 0x32
+  setTimer7SEG(25);		// 0.5s
+ 8000166:	2019      	movs	r0, #25
  8000168:	f000 fb3c 	bl	80007e4 <setTimer7SEG>
   setTimerDOT(100);		// 1s
  800016c:	2064      	movs	r0, #100	; 0x64
@@ -145,8 +145,8 @@ int main(void)
  800018a:	681b      	ldr	r3, [r3, #0]
  800018c:	2b01      	cmp	r3, #1
  800018e:	d1f0      	bne.n	8000172 <main+0x26>
-		  setTimer7SEG(50);
- 8000190:	2032      	movs	r0, #50	; 0x32
+		  setTimer7SEG(25);
+ 8000190:	2019      	movs	r0, #25
  8000192:	f000 fb27 	bl	80007e4 <setTimer7SEG>
 		  if (index_led == 4) index_led = 0;	// reset index_led
  8000196:	4b0c      	ldr	r3, [pc, #48]	; (80001c8 <main+0x7c>)
