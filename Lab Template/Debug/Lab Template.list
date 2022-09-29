@@ -117,7 +117,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer7SEG(25);		// 0.5s
+  setTimer7SEG(25);		// 0.25s
  8000166:	2019      	movs	r0, #25
  8000168:	f000 fb3c 	bl	80007e4 <setTimer7SEG>
   setTimerDOT(100);		// 1s
