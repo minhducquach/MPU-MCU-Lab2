@@ -274,22 +274,22 @@ void update7SEG ( int index ) {
 	}
 }
 
-int counter = 100;
+//int counter = 100;
 //int start = 0;
 void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim )
 {
-	timerRun();
+//	timerRun();
 	// start updating LEDs
 //	if (start == 0){
 //		update7SEG(index_led++);
 //		start = 1;
 //	}
 	// test led PA5
-	counter--;
-	if( counter <= 0) {
-		counter = 100;
-		HAL_GPIO_TogglePin ( LED_RED_GPIO_Port , LED_RED_Pin ) ;
-	}
+//	counter--;
+//	if( counter <= 0) {
+//		counter = 100;
+//		HAL_GPIO_TogglePin ( LED_RED_GPIO_Port , LED_RED_Pin ) ;
+//	}
 }
 
 void display7SEG(int counter){
