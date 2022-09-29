@@ -108,12 +108,12 @@ int main(void)
   int start = 0;
   while (1)
   {
-	  if (start == 0){
-		  clearLED();
-		  updateClockBuffer () ;
-		  update7SEG(index_led++);
-		  start = 1;
-	  }
+//	  if (start == 0){
+//		  clearLED();
+//		  updateClockBuffer () ;
+//		  update7SEG(index_led++);
+//		  start = 1;
+//	  }
 	  // blink DOT
 	  if (timer_flag_DOT == 1){
 		  setTimerDOT(100);

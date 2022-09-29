@@ -52,9 +52,8 @@ static void MX_TIM2_Init(void);
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
 void display7SEG(int);
-void updateClockBuffer();
+void updateClockBuffer(int, int);
 void update7SEG(int);
-void clearLED();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -62,7 +61,6 @@ void clearLED();
 const int MAX_LED = 4;
 int index_led = 0;
 int led_buffer[4] = {1 , 2 , 3 , 4};
-int hour = 15 , minute = 8 , second = 59;
 /* USER CODE END 0 */
 
 /**
@@ -105,14 +103,20 @@ int main(void)
   setTimerDOT(100);		// 1s
   setTimer7SEG(100);	// 1s
   setTimerUPDATE(25);	// 250ms
-  int start = 0;
+  int hour = 15 , minute = 8 , second = 50, start = 0;
   while (1)
   {
-	  if (start == 0){
-		  clearLED();
-		  updateClockBuffer () ;
-		  update7SEG(index_led++);
-		  start = 1;
+	  second ++;
+	  if ( second >= 60) {
+		  second = 0;
+		  minute ++;
+	  }
+	  if( minute >= 60) {
+		  minute = 0;
+		  hour ++;
+	  }
+	  if( hour >=24) {
+		  hour = 0;
 	  }
 	  // blink DOT
 	  if (timer_flag_DOT == 1){
@@ -123,25 +127,15 @@ int main(void)
 	  // update led_buffer
 	  if (timer_flag_7SEG == 1){
 		  setTimer7SEG(100);
-		  second ++;
-		  if ( second >= 60) {
-			  second = 0;
-			  minute ++;
-		  }
-		  if( minute >= 60) {
-			  minute = 0;
-			  hour ++;
-		  }
-		  if( hour >=24) {
-			  hour = 0;
-		  }
-		  updateClockBuffer () ;
+		  updateClockBuffer (hour, minute) ;
+	  }
+	  if (start == 0){
+		  update7SEG(index_led++);
+		  start = 1;
 	  }
 	  // display LED
 	  if (timer_flag_UPDATE == 1){
-		  if (index_led == 4) index_led = 0;
 		  setTimerUPDATE(25);
-		  clearLED();
 		  update7SEG(index_led++);
 	  }
 
@@ -402,7 +396,7 @@ void display7SEG(int counter){
 	}
 }
 
-void updateClockBuffer(){
+void updateClockBuffer(int hour, int minute){
 	led_buffer[0] = hour / 10;		// hour's first digit
 	led_buffer[1] = hour % 10;		// hour's second digit
 	led_buffer[2] = minute / 10;	// minute's first digit
@@ -415,11 +409,6 @@ void updateClockBuffer(){
 		led_buffer[2] = 0;
 		led_buffer[3] = 0;
 	}
-}
-
-void clearLED(){
-	  HAL_GPIO_WritePin(GPIOB, SEG0_Pin|SEG1_Pin|SEG2_Pin|SEG3_Pin
-	                          |SEG4_Pin|SEG5_Pin|SEG6_Pin, GPIO_PIN_SET);
 }
 
 /* USER CODE END 4 */

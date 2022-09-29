@@ -62,7 +62,7 @@ void clearLED();
 const int MAX_LED = 4;
 int index_led = 0;
 int led_buffer[4] = {1 , 2 , 3 , 4};
-int hour = 15 , minute = 8 , second = 59;
+int hour = 15 , minute = 8 , second = 50;
 /* USER CODE END 0 */
 
 /**
@@ -122,23 +122,36 @@ int main(void)
 	  }
 	  // update led_buffer
 	  if (timer_flag_7SEG == 1){
-		  setTimer7SEG(100);
-		  second ++;
-		  if ( second >= 60) {
-			  second = 0;
-			  minute ++;
-		  }
-		  if( minute >= 60) {
-			  minute = 0;
-			  hour ++;
-		  }
-		  if( hour >=24) {
-			  hour = 0;
-		  }
-		  updateClockBuffer () ;
+//		  setTimer7SEG(100);
+//		  second ++;
+//		  if ( second >= 60) {
+//			  second = 0;
+//			  minute ++;
+//		  }
+//		  if( minute >= 60) {
+//			  minute = 0;
+//			  hour ++;
+//		  }
+//		  if( hour >=24) {
+//			  hour = 0;
+//		  }
 	  }
 	  // display LED
 	  if (timer_flag_UPDATE == 1){
+//		  setTimer7SEG(100);
+		  		  second ++;
+		  		  if ( second >= 60) {
+		  			  second = 0;
+		  			  minute ++;
+		  		  }
+		  		  if( minute >= 60) {
+		  			  minute = 0;
+		  			  hour ++;
+		  		  }
+		  		  if( hour >=24) {
+		  			  hour = 0;
+		  		  }
+		  updateClockBuffer () ;
 		  if (index_led == 4) index_led = 0;
 		  setTimerUPDATE(25);
 		  clearLED();

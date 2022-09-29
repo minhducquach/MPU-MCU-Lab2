@@ -9,10 +9,8 @@
 
 int timer_flag_7SEG = 0;
 int timer_flag_DOT = 0;
-int timer_flag_UPDATE = 0;
 int timer_counter_7SEG = 0;
 int timer_counter_DOT = 0;
-int timer_counter_UPDATE = 0;
 
 void setTimer7SEG(int duration){
 	timer_counter_7SEG = duration;
@@ -22,11 +20,6 @@ void setTimer7SEG(int duration){
 void setTimerDOT(int duration){
 	timer_counter_DOT = duration;
 	timer_flag_DOT = 0;
-}
-
-void setTimerUPDATE(int duration){
-	timer_counter_UPDATE = duration;
-	timer_flag_UPDATE = 0;
 }
 
 void timerRun(){
@@ -40,12 +33,6 @@ void timerRun(){
 		timer_counter_DOT--;
 		if (timer_counter_DOT <= 0){
 			timer_flag_DOT = 1;
-		}
-	}
-	if (timer_counter_UPDATE > 0){
-		timer_counter_UPDATE--;
-		if (timer_counter_UPDATE <= 0){
-			timer_flag_UPDATE = 1;
 		}
 	}
 }
