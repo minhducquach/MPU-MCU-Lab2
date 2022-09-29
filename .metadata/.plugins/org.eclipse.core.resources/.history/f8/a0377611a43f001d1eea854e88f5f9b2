@@ -98,15 +98,8 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   setTimer7SEG(50);
-  setTimerDOT(100);
   while (1)
   {
-	  // blink DOT
-	  if (timer_flag_DOT == 1){
-		  setTimerDOT(100);
-		  HAL_GPIO_TogglePin(GPIOA, DOT_Pin);
-	  }
-	  // switch LED
 	  if (timer_flag_7SEG == 1){
 		  setTimer7SEG(50);
 		  if (index_led == 4) index_led = 0;	// reset index_led
