@@ -183,6 +183,7 @@ int main(void)
  80001c0:	4809      	ldr	r0, [pc, #36]	; (80001e8 <main+0x9c>)
  80001c2:	f000 fd75 	bl	8000cb0 <HAL_GPIO_TogglePin>
 	  }
+	  // update led_buffer
 	  if (timer_flag_7SEG == 1){
  80001c6:	4b09      	ldr	r3, [pc, #36]	; (80001ec <main+0xa0>)
  80001c8:	681b      	ldr	r3, [r3, #0]

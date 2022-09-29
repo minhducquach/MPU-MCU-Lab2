@@ -121,7 +121,6 @@ int main(void)
 		  setTimerDOT(100);
 		  HAL_GPIO_TogglePin(GPIOA, DOT_Pin);
 	  }
-	  // update led_buffer
 	  if (timer_flag_7SEG == 1){
 		  setTimer7SEG(100);
 		  updateClockBuffer (hour, minute) ;
