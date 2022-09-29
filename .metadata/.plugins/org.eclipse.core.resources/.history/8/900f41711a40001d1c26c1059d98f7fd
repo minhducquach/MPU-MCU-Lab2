@@ -52,7 +52,7 @@ static void MX_TIM2_Init(void);
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
 void display7SEG(int);
-void updateClockBuffer();
+void updateClockBuffer(int, int);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -60,7 +60,6 @@ void updateClockBuffer();
 const int MAX_LED = 4;
 int index_led = 0;
 int led_buffer[4] = {1 , 2 , 3 , 4};
-int hour = 15 , minute = 8 , second = 50;
 /* USER CODE END 0 */
 
 /**
@@ -102,31 +101,30 @@ int main(void)
 
   setTimerDOT(100);		// 1s
   setTimer7SEG(100);	// 1s
+  int hour = 15 , minute = 8 , second = 50;
   while (1)
   {
+	  second ++;
+	  if ( second >= 60) {
+		  second = 0;
+		  minute ++;
+	  }
+	  if( minute >= 60) {
+		  minute = 0;
+		  hour ++;
+	  }
+	  if( hour >=24) {
+		  hour = 0;
+	  }
 	  // blink DOT
 	  if (timer_flag_DOT == 1){
 		  setTimerDOT(100);
 		  HAL_GPIO_TogglePin(GPIOA, DOT_Pin);
-		  // test led PA5
-		  HAL_GPIO_TogglePin ( LED_RED_GPIO_Port , LED_RED_Pin ) ;
 	  }
 	  // update led_buffer
 	  if (timer_flag_7SEG == 1){
 		  setTimer7SEG(100);
-		  second ++;
-		  if ( second >= 60) {
-			  second = 0;
-			  minute ++;
-		  }
-		  if( minute >= 60) {
-			  minute = 0;
-			  hour ++;
-		  }
-		  if( hour >=24) {
-			  hour = 0;
-		  }
-		  updateClockBuffer () ;
+		  updateClockBuffer (hour, minute) ;
 	  }
 
     /* USER CODE END WHILE */
@@ -288,9 +286,16 @@ void update7SEG ( int index ) {
 	}
 }
 
+int counter = 100;
 void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim )
 {
 	timerRun();
+	// test led PA5
+	counter--;
+	if( counter <= 0) {
+		counter = 100;
+		HAL_GPIO_TogglePin ( LED_RED_GPIO_Port , LED_RED_Pin ) ;
+	}
 }
 
 void display7SEG(int counter){
@@ -386,7 +391,7 @@ void display7SEG(int counter){
 	}
 }
 
-void updateClockBuffer(){
+void updateClockBuffer(int hour, int minute){
 	led_buffer[0] = hour / 10;		// hour's first digit
 	led_buffer[1] = hour % 10;		// hour's second digit
 	led_buffer[2] = minute / 10;	// minute's first digit
