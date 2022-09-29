@@ -98,9 +98,6 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
-  setTimerDOT(100);		// 1s
-  setTimer7SEG(100);	// 1s
   int hour = 15 , minute = 8 , second = 50;
   while (1)
   {
@@ -116,16 +113,8 @@ int main(void)
 	  if( hour >=24) {
 		  hour = 0;
 	  }
-	  // blink DOT
-	  if (timer_flag_DOT == 1){
-		  setTimerDOT(100);
-		  HAL_GPIO_TogglePin(GPIOA, DOT_Pin);
-	  }
-	  if (timer_flag_7SEG == 1){
-		  setTimer7SEG(100);
-		  updateClockBuffer (hour, minute) ;
-	  }
-
+	  updateClockBuffer (hour, minute) ;
+	  HAL_Delay (1000) ;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -286,9 +275,15 @@ void update7SEG ( int index ) {
 }
 
 int counter = 100;
+//int start = 0;
 void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim )
 {
 	timerRun();
+	// start updating LEDs
+//	if (start == 0){
+//		update7SEG(index_led++);
+//		start = 1;
+//	}
 	// test led PA5
 	counter--;
 	if( counter <= 0) {
