@@ -97,8 +97,8 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer7SEG(50);		// 0.5s
-  setTimerDOT(100);		// 1s
+  setTimer7SEG(25);
+  setTimerDOT(100);
   while (1)
   {
 	  // blink DOT
@@ -108,7 +108,7 @@ int main(void)
 	  }
 	  // switch LED
 	  if (timer_flag_7SEG == 1){
-		  setTimer7SEG(50);
+		  setTimer7SEG(25);
 		  if (index_led == 4) index_led = 0;	// reset index_led
 		  update7SEG(index_led++);
 	  }
