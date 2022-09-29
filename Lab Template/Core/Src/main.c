@@ -95,29 +95,17 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   int led_status = 1;
-  setTimer7SEG(50);
-  setTimerDOT(100);
+  setTimer7SEG(50);		// 0.5s
+  setTimerDOT(100);		// 1s
   while (1)
   {
-//	  if (timer_flag == 1){
-//		  setTimer(50);
-//		  HAL_GPIO_TogglePin(GPIOA, EN0_Pin);
-//		  HAL_GPIO_TogglePin(GPIOA, EN1_Pin);
-//		  if (led_status == 1) led_status = 2;
-//		  else if (led_status == 2) led_status = 1;
-//	  }
-//	  if (led_status == 1){
-//		  display7SEG(1);
-//	  }
-//	  else if (led_status == 2){
-//		  display7SEG(2);
-//	  }
 	  if (timer_flag_DOT == 1){
 		  setTimerDOT(100);
 		  HAL_GPIO_TogglePin(GPIOA, DOT_Pin);
 	  }
 	  if (timer_flag_7SEG == 1){
 		  setTimer7SEG(50);
+		  // switch led statuses
 		  if (led_status == 1){
 			  HAL_GPIO_TogglePin(GPIOA, EN0_Pin);
 			  HAL_GPIO_TogglePin(GPIOA, EN1_Pin);
@@ -139,6 +127,7 @@ int main(void)
 			  led_status = 1;
 		  }
 	  }
+	  // display LEDs 1,2,3,4
 	  if (led_status == 1){
 		  display7SEG(1);
 	  }
