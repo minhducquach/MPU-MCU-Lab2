@@ -386,10 +386,10 @@ void display7SEG(int counter){
 }
 
 void updateClockBuffer(int hour, int minute){
-	led_buffer[0] = hour / 10;		// hour's first digit
-	led_buffer[1] = hour % 10;		// hour's second digit
-	led_buffer[2] = minute / 10;	// minute's first digit
-	led_buffer[3] = minute % 10;	// minute's second digit
+	led_buffer[0] = hour / 10;
+	led_buffer[1] = hour % 10;
+	led_buffer[2] = minute / 10;
+	led_buffer[3] = minute % 10;
 	if (hour >= 24){
 		led_buffer[0] = 0;
 		led_buffer[1] = 0;

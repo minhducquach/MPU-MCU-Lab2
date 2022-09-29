@@ -115,6 +115,7 @@ int main(void)
 	  }
 	  updateClockBuffer (hour, minute) ;
 	  HAL_Delay (1000) ;
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -274,22 +275,22 @@ void update7SEG ( int index ) {
 	}
 }
 
-//int counter = 100;
+int counter = 100;
 //int start = 0;
 void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim )
 {
-//	timerRun();
+	timerRun();
 	// start updating LEDs
 //	if (start == 0){
 //		update7SEG(index_led++);
 //		start = 1;
 //	}
 	// test led PA5
-//	counter--;
-//	if( counter <= 0) {
-//		counter = 100;
-//		HAL_GPIO_TogglePin ( LED_RED_GPIO_Port , LED_RED_Pin ) ;
-//	}
+	counter--;
+	if( counter <= 0) {
+		counter = 100;
+		HAL_GPIO_TogglePin ( LED_RED_GPIO_Port , LED_RED_Pin ) ;
+	}
 }
 
 void display7SEG(int counter){
@@ -386,10 +387,10 @@ void display7SEG(int counter){
 }
 
 void updateClockBuffer(int hour, int minute){
-	led_buffer[0] = hour / 10;		// hour's first digit
-	led_buffer[1] = hour % 10;		// hour's second digit
-	led_buffer[2] = minute / 10;	// minute's first digit
-	led_buffer[3] = minute % 10;	// minute's second digit
+	led_buffer[0] = hour / 10;
+	led_buffer[1] = hour % 10;
+	led_buffer[2] = minute / 10;
+	led_buffer[3] = minute % 10;
 	if (hour >= 24){
 		led_buffer[0] = 0;
 		led_buffer[1] = 0;
