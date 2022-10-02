@@ -1,0 +1,44 @@
+/*
+ * fsm_automatic.c
+ *
+ *  Created on: Sep 30, 2022
+ *      Author: Minh Duc Quach
+ */
+
+#include "fsm_automatic.h"
+
+void fsm_automatic_run(){
+	switch (status){
+	case INIT:
+		status = AUTO_RED;
+		HAL_GPIO_WritePin(GPIOA, A_Pin, SET);
+		HAL_GPIO_WritePin(GPIOA, B_Pin, RESET);
+		setTimer(5000);
+		break;
+	case AUTO_RED:
+		if (timer_flag == 1){
+			status = AUTO_GREEN;
+			 HAL_GPIO_WritePin(GPIOA, A_Pin, SET);
+			 HAL_GPIO_WritePin(GPIOA, B_Pin, RESET);
+			setTimer(3000);
+		}
+		break;
+	case AUTO_YELLOW:
+		if (timer_flag == 1){
+			status = AUTO_RED;
+			HAL_GPIO_WritePin(GPIOA, A_Pin, SET);
+			HAL_GPIO_WritePin(GPIOA, B_Pin, RESET);
+			setTimer(5000);
+		}
+		break;
+	case AUTO_GREEN:
+		if (timer_flag == 1){
+			status = AUTO_YELLOW;
+			 HAL_GPIO_WritePin(GPIOA, A_Pin, SET);
+			 HAL_GPIO_WritePin(GPIOA, B_Pin, RESET);
+			setTimer(2000);
+		}
+		break;
+	}
+}
+
