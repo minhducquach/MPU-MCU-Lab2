@@ -58,6 +58,7 @@ void clearLED();
 void updateLEDMatrix(int);
 void displayLEDMatrix(uint8_t);
 void clearENM();
+void rotate();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -112,7 +113,10 @@ int main(void)
   while (1)
   {
 	  if (timer_flag_MATRIX == 1){
-		  if (index_led_matrix > 7) index_led_matrix = 0;
+		  if (index_led_matrix > 7){
+			  index_led_matrix = 0;
+			  rotate();
+		  }
 		  setTimerMATRIX(2);
 		  clearENM();
 		  updateLEDMatrix(index_led_matrix++);
@@ -518,6 +522,14 @@ void clearENM(){
 	 HAL_GPIO_WritePin(GPIOA, ENM0_Pin|ENM1_Pin
 	                          |ENM2_Pin|ENM3_Pin|ENM4_Pin|ENM5_Pin
 	                          |ENM6_Pin|ENM7_Pin, GPIO_PIN_SET);
+}
+
+void rotate(){
+	uint8_t tmp = matrix_buffer[0];
+	for (int i = 0; i < MAX_LED_MATRIX - 1; i++){
+		matrix_buffer[i] = matrix_buffer[i+1];
+	}
+	matrix_buffer[MAX_LED_MATRIX - 1] = tmp;
 }
 /* USER CODE END 4 */
 
